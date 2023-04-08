@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Login.css" />
+    <title>login-page</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <section class="section-home">
+      <div class="centre">
+        <div class="form">
+          <h1>Login</h1>
+          <p>Get better data by login in your details</p>
+          <form method="post" action="http://127.0.0.1/books.html">
+            <div class="contact-form">
+              <input
+                id="email"
+                type="email"
+                class="form-control"
+                placeholder="Your Email"
+                name="email"
+              />
+            </div>
+            <div class="contact-form">
+              <input
+                id="password"
+                type="password"
+                class="form-control"
+                placeholder="password"
+                name="password"
+              />
+            </div>
+          </form>
+
+          <a
+            href="./books.html"
+            className="submit"
+            type="submit"
+            onclick="postData(event)"
+            >Login</a
+          >
+          <div class="sign-up-container">
+            <h2>Sign up for a book Today!</h2>
+            <a class="sign-up-button" onclick="openPopup()">
+              <h3>Sign Up</h3>
+            </a>
+            <div
+              id="popup-form"
+              style="
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+                background-color: rgba(255, 255, 255, 0.9);
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+                padding: 20px;
+              "
+            >
+              <h2>Popup Form</h2>
+              <button type="button" onclick="closePopup()">Close</button>
+              <div class="form">
+                <h1>Author</h1>
+                <p id="green-message"></p>
+                <p id="message"></p>
+                <p>"Create New Authors</p>
+                <form
+                  onsubmit="postingData(event)"
+                  action="http://127.0.0.1/Login.html"
+                >
+                  <div class="contact-form">
+                    <input
+                      id="firstname"
+                      type="text"
+                      class="form-control"
+                      placeholder="First Name"
+                      name="first_name"
+                    />
+                  </div>
+                  <div class="contact-form">
+                    <input
+                      id="lastname"
+                      type="text"
+                      class="form-control"
+                      placeholder="Last Name"
+                      name="last_name"
+                    />
+                  </div>
+                  <div class="contact-form">
+                    <input
+                      id="email2"
+                      type="text"
+                      class="form-control"
+                      placeholder="Email"
+                      name="email"
+                    />
+                  </div>
+                  <div class="contact-form">
+                    <input
+                      id="password2"
+                      type="text"
+                      class="form-control"
+                      placeholder="Password"
+                      name="password"
+                    />
+                  </div>
+                  <div class="contact-form">
+                    <input
+                      id="country"
+                      type="text"
+                      class="form-control"
+                      placeholder="Country"
+                      name="country"
+                    />
+                  </div>
+                  <textarea
+                    type="{Text}"
+                    placeholder="Author Description"
+                    cols="60"
+                    id="description"
+                    name="description"
+                    rows="8"
+                    required
+                  ></textarea>
+                  <button
+                    className="submit"
+                    onclick="postingData"
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      function openPopup() {
+        // Blur the background
+
+        // Show the popup form
+        document.getElementById("popup-form").style.display = "block";
+      }
+
+      function closePopup() {
+        // Unblur the background
+        document.body.style.filter = "none";
+
+        // Hide the popup form
+        document.getElementById("popup-form").style.display = "none";
+      }
+    </script>
+    <script>
+      function postData(event) {
+        event.preventDefault(); // prevent the default form submit behavior
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const data = {
+          email: email,
+          password: password,
+        };
+        console.log(data);
+
+        axios
+          .post("https://exercise.techtrend.africa/api/author-login", data)
+          .then((response) => {
+            console.log(response.data);
+            // message
+            const message = (document.getElementById("message").innerText =
+              response.data.message);
+            console.log(response.data.data.token.plainTextToken);
+            localStorage.setItem(
+              "token",
+              response.data.data.token.plainTextToken
+            );
+
+            localStorage.setItem("author_id", response.data.data.id);
+            window.location.href = "http://127.0.0.1:5500/books.html";
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    </script>
+    <script>
+      function postingData(event) {
+        event.preventDefault(); // prevent the default form submit behavior
+
+        const email = document.getElementById("email2").value;
+        const password = document.getElementById("password2").value;
+        const firstName = document.getElementById("firstname").value;
+        const lastName = document.getElementById("lastname").value;
+        const country = document.getElementById("country").value;
+        const description = document.getElementById("description").value;
+
+        const data = {
+          email: email,
+          password: password,
+          first_name: firstName,
+          last_name: lastName,
+          country: country,
+          description: description,
+        };
+        console.log(data);
+
+        axios
+          .post("https://exercise.techtrend.africa/api/author", data)
+          .then((response) => {
+            console.log(response.data);
+            const message = (document.getElementById(
+              "green-message"
+            ).innerText = response.data.message);
+          })
+          .catch((error) => {
+            console.error(error);
+            // console.log(error.response.data.message);
+            const message = (document.getElementById("message").innerText =
+              error.response.data.message);
+          });
+      }
+    </script>
+  </body>
+</html>

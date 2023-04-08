@@ -1,0 +1,113 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Krub", sans-serif;
+  margin: 0 auto;
+}
+
+.section-seebooks {
+  width: 100vw;
+  height: 100vh;
+  height: auto;
+  margin-bottom: 40px;
+  background: #273746;
+  color: #ffffff;
+  padding: 50px;
+  margin-bottom: 50px;
+}
+.section-title h2 {
+  text-align: center;
+  font-size: 4rem;
+}
+
+.line {
+  display: block;
+  width: 70px;
+  height: 3px;
+  margin: 1px auto;
+  background-color: #121b27;
+}
+
+.book-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.card {
+  text-align: center;
+  height: 300px;
+  background-color: #17202a;
+  color: #ffffff;
+  box-shadow: -6px 11px 5px -4px rgba(0, 0, 0, 0.42);
+  -webkit-box-shadow: -6px 11px 5px -4px rgba(0, 0, 0, 0.42);
+  -moz-box-shadow: -6px 11px 5px -4px rgba(0, 0, 0, 0.42);
+  margin: 100px;
+  border-radius: 10px;
+}
+
+.book-content h1 {
+  text-align: center;
+
+  font-size: 4rem;
+}
+
+.book-content button {
+  background-color: #17202a;
+  color: #ffffff;
+  margin-top: 20px;
+  padding: 1rem 2.5rem;
+  font-size: 2rem;
+  font-weight: 400;
+  border-radius: 10px;
+  text-decoration: none;
+  /* width: 220px; */
+  height: 50px;
+  text-align: center;
+}
+
+.tech-content:hover {
+  background-color: #121b27;
+  transition-duration: 1s;
+  cursor: pointer;
+}
+
+.book-number {
+  color: #121b27;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: block;
+  margin: 0 auto;
+  line-height: 50px;
+}
+
+#isbn {
+  font-size: 2rem;
+  margin-top: 0px;
+  color: #121b27;
+  text-align: center;
+}
+
+#author {
+  margin: 5px 0;
+  font-size: 2rem;
+  color: #121b27;
+  text-align: center;
+}
+
+.book-info-box strong {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+#author {
+  font-size: 2rem;
+}
